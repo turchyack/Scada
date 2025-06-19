@@ -91,4 +91,50 @@ void TagManager::onTagValueChanged()
         return;
 
     emit dataChanged(index(row), index(row), {ValueRole});
+
 }
+
+Tag* TagManager::createTag(const QString& name, double initialValue, int id, const QString& type)
+{
+    beginInsertRows(QModelIndex(), m_tags.count(), m_tags.count());
+    Tag* tag = new Tag(name, initialValue, id, type, this);
+    connect(tag, &Tag::valueChanged, this, &TagManager::onTagValueChanged);
+    m_tags.append(tag);
+    endInsertRows();
+    return tag;
+}
+
+
+void TagManager::setTagValue(const QString& name, double value)
+{
+    for (Tag* tag : m_tags) {
+        if (tag->name() == name) {
+            tag->setValue(value);
+            break;
+        }
+    }
+}
+
+void TagManager::setTagValueByAddress(int address, double value)
+{
+    for (Tag* tag : m_tags) {
+        if (tag->address() == address) {
+            tag->setValue(value);
+            break;
+        }
+    }
+}
+
+
+
+Tag* TagManager::getTagByAddress(int address)
+{
+    for (auto& tag : m_tags) {
+        if (tag->address() == address) {
+            return tag;
+        }
+    }
+    return nullptr;
+}
+
+
