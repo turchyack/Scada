@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "name": "FanMotor",
+    "driveType": "VFD",
+    "power": 3.0,
+    "address": 10,
+    "description": "Вентилятор подачи воздуха",
+    "tags": [
+      {
+        "name": "Speed",
+        "value": 0.0,
+        "address": 101,
+        "type": "float",
+        "simulator": "temperature"
+      },
+      {
+        "name": "Status",
+        "value": 1.0,
+        "address": 102,
+        "type": "bool"
+      }
+    ]
+  }
+]

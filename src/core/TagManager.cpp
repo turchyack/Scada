@@ -1,18 +1,19 @@
 #include "TagManager.h"
 #include "Tag.h"
+#include "utils/Types.h"
 
 
 TagManager::TagManager(QObject* parent)
     : QAbstractListModel(parent)
 {
 
-    m_tags.append(new Tag("Temperature", 24.5, 0x01, "float", this));
-    m_tags.append(new Tag("Pressure", 1.2, 0x02, "float", this));
-    m_tags.append(new Tag("ValveOpen", 1.0, 0x03, "bool", this));  // 1.0 = true
-    m_tags.append(new Tag("Level", 78.0, 0x04, "int", this));
+    // m_tags.append(new Tag("Temperature", 24.5, 0x01, "float", this));
+    // m_tags.append(new Tag("Pressure", 1.2, 0x02, "float", this));
+    // m_tags.append(new Tag("ValveOpen", 1.0, 0x03, "bool", this));  // 1.0 = true
+    // m_tags.append(new Tag("Level", 78.0, 0x04, "int", this));
 
-    m_tags.append(new Tag("Temperature", 1, 0x05, "float", this));
-    m_tags.append(new Tag("Pressure", 2, 0x06, "float" ,  this));
+    // m_tags.append(new Tag("Temperature", 1, 0x05, "float", this));
+    // m_tags.append(new Tag("Pressure", 2, 0x06, "float" ,  this));
 
 
 }

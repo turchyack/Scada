@@ -17,6 +17,10 @@ qt_add_executable(scada-lite
     # Точка входа
     src/main.cpp
 
+    # Утилиты и типы
+    src/utils/Types.h
+    src/utils/Types.cpp
+
     # Модель данных
     src/core/Tag.h
     src/core/Tag.cpp
@@ -45,6 +49,17 @@ qt_add_executable(scada-lite
     src/device/Device.cpp   # Логика одного механизма (например, конвейера)
     src/device/DeviceManager.h
     src/device/DeviceManager.cpp
+    src/device/DeviceConfig.h
+
+    # загрузка конфига
+    src/config/DeviceConfigLoader.h
+    src/config/DeviceConfigLoader.cpp
+
+#model
+    src/model/DeviceListModel.h
+    src/model/DeviceListModel.cpp
+    src/model/DeviceViewModel.h
+    src/model/DeviceViewModel.cpp
 )
 
 # Ресурсы QML

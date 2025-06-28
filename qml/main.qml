@@ -81,7 +81,17 @@ ApplicationWindow {
                 Text { text: address; width: 100 }
                 Text { text: type; width: 100 }
             }
+            Component.onCompleted: {
+                console.log("Loaded tag:", name, value, address, type)
+            }
+
+
         }
     }
 }
+
+
+
+
+
 

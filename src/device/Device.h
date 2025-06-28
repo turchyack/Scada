@@ -2,39 +2,60 @@
 #ifndef DEVICE_H
 #define DEVICE_H
 
-#include <string>
-#include <optional>
+#include <QString>
+#include <QObject>
+#include "utils/Types.h"
+#include "DeviceConfig.h"
 
-enum class DriveType {
-    FrequencyConverter,
-    Contactor,
-    Unknown
-};
+/**
+ * @brief Тип привода устройства
+ */
 
-class Device {
+/**
+ * @brief Класс Device — абстракция одного устройства (мотор, конвейер и т.д.)
+ */
+class Device : public QObject {
+    Q_OBJECT
+
 public:
+    /**
+     * @brief Конструктор устройства
+     * @param id Уникальный ID (например, "M1")
+     * @param name Человеко-читаемое название
+     * @param drive Тип привода
+     */
+    Device(const QString& id, const QString& name, DriveType drive);
 
-    // Device::Device(const QJsonObject& obj);
-    Device(const std::string& id, const std::string& name, DriveType type);
+    Device(const DeviceConfig& config, QObject* parent = nullptr);
 
-    const std::string& id() const;
-    const std::string& name() const;
+    // --- Геттеры ---
+    QString id() const;
+    QString name() const;
     DriveType driveType() const;
 
-    void start();
-    void stop();
-    void setSpeed(int rpm);
-    void setReverse(bool enabled);
+    // --- Состояние устройства ---
+    bool isRunning() const;
+    bool isFault() const;
+    bool isReady() const;
+
+    // --- Управление устройством ---
+    void start();  ///< Запуск устройства
+    void stop();   ///< Остановка
+    void fault();  ///< Вызов аварии
+    void reset();  ///< Сброс аварии
+
+signals:
+    void stateChanged();  ///< Сигнал при изменении состояния
 
 private:
-    std::string m_id;
-    std::string m_name;
+    QString m_id;
+    QString m_name;
     DriveType m_driveType;
 
-    int m_speed = 0;
-    bool m_isRunning = false;
-    bool m_isReverse = false;
+    // Текущее состояние
+    bool m_running = false;
+    bool m_fault = false;
+    bool m_ready = true;
 };
-
 
 #endif // DEVICE_H

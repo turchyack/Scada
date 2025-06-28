@@ -4,17 +4,19 @@
 #include <QAbstractListModel>
 #include <QList>
 #include "Tag.h"
+#include "utils/Types.h"
 
 class TagManager : public QAbstractListModel
 {
     Q_OBJECT
 public:
-    enum TagRoles {
-        NameRole = Qt::UserRole + 1,
-        ValueRole,
-        AddressRole,
-        TypeRole
-    };
+    // TagRoles теперь определен в utils/Types.h
+    // enum TagRoles {
+    //     NameRole = Qt::UserRole + 1,
+    //     ValueRole,
+    //     AddressRole,
+    //     TypeRole
+    // };
 
     explicit TagManager(QObject* parent = nullptr);
     ~TagManager();
@@ -32,6 +34,7 @@ public:
     Q_INVOKABLE Tag* getTag(int index) const;
     Q_INVOKABLE void setTagValue(const QString& name, double value);
     Q_INVOKABLE void setTagValueByAddress(int address, double value);
+
 
 
 

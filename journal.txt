@@ -1,0 +1,36 @@
+28.06 
+список всех изменений за сегодня
+🎯 Основная задача: Рефакторинг небольших типов в папку utils
+✅ Создана новая структура
+src/utils/Types.h - централизованный файл со всеми небольшими типами
+src/utils/Types.cpp - реализация вспомогательных функций
+✅ Перенесены типы в utils/Types.h
+DriveType (enum class) - типы приводов (Unknown, VFD, Contactor, Signaling)
+TagConfig (struct) - конфигурация тега (name, value, address, type, simulator)
+DeviceConfig (struct) - конфигурация устройства (id, name, driveType, power, address, description, tags)
+TagRoles (enum) - роли для модели тегов (NameRole, ValueRole, AddressRole, TypeRole)
+DeviceRoles (enum) - роли для модели устройств (DeviceNameRole, DeviceDriveTypeRole, DeviceTagModelRole)
+✅ Исправлен конфликт имен
+Переименованы роли в DeviceRoles для избежания совпадения с TagRoles
+✅ Обновлены зависимости
+src/device/DeviceConfig.h - теперь только включает utils/Types.h
+src/device/Device.h - использует DriveType из utils/Types.h
+src/core/TagManager.h - использует TagRoles из utils/Types.h
+src/model/DeviceListModel.h - использует DeviceRoles из utils/Types.h
+src/config/DeviceConfigLoader.h/.cpp - используют типы из utils/Types.h
+✅ Удалены старые файлы
+src/device/DriveType.h
+src/device/DriveType.cpp
+src/config/TagConfig.h
+src/device/DeviceConfig.cpp
+✅ Добавлены недостающие реализации
+src/model/DeviceViewModel.cpp - полная реализация DeviceViewModel и TagListModel
+src/model/DeviceListModel.cpp - полная реализация DeviceListModel
+✅ Обновлен CMakeLists.txt
+Добавлены новые файлы utils/Types.h и utils/Types.cpp
+Удалены ссылки на удаленные файлы
+✅ Обновлен main.cpp
+Добавлена регистрация типов для QML (DeviceListModel, DeviceViewModel, TagListModel)
+Добавлены необходимые включения заголовочных файлов
+🎉 Результат
+Все небольшие типы теперь централизованы в src/utils/Types.h, что упрощает их поддержку и использование в проекте. Конфликты имен устранены, все зависимости обновлены.
